@@ -9,25 +9,25 @@ import "./App.css";
 
 const links = [
   {
-    name: "github",
+    name: "GitHub",
     url: "https://github.com/daasfab",
     appUrl: "",
     icon: <FaGithub />,
   },
   {
-    name: "medium",
+    name: "Medium",
     url: "https://medium.com/@thatonecyberguy",
     appUrl: "", // medium doesn't support proper deep linking to profiles
     icon: <FaMedium />,
   },
   {
-    name: "instagram",
+    name: "Instagram",
     url: "https://instagram.com/daasfab_",
     appUrl: "instagram://user?username=daasfab_", //will open my profile locally on the app instead of web
     icon: <FaInstagram />,
   },
   {
-    name: "portfolio (coming soon)",
+    name: "Portfolio (coming soon)",
     url: "#",
     icon: <FaUserShield />,
     comingSoon: true,
@@ -82,14 +82,14 @@ export default function LinktreePage() {
     <div className="page">
       <div className="profile">
         <img src="/pfp.png" alt="profile" />
-        <h1>daulet rashidov</h1>
-        <p>cybersecurity & software engineer</p>
-        <p>pronouns: he/him</p>
+        <h1>Daulet Rashidov</h1>
+        <p>Cybersecurity & Software Engineer</p>
+        <p>Pronouns: He/Him</p>
         <p className="bio">
-          software engineer with a cyber security soul—building smart systems,
-          breaking them (ethically 😅), and always learning. fueled by
-          curiosity, coffee (lots), and a love for digital defense. let’s
-          connect & make magic happen! ✨
+          Software Engineer with a Cyber Security soul—building smart systems,
+          breaking them (ethically! 😅), and always learning. Fueled by
+          curiosity, coffee (lots), and a love for digital defense. Let’s
+          connect & Make Magic Happen! ✨
         </p>
       </div>
 
