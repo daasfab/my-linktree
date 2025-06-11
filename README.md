@@ -1,3 +1,12 @@
+# Welcome! 
+This is my take on the Linktree website/platform.
+
+You can see the deployed version [HERE](https://my-linktree-black.vercel.app/) or on my LinkedIn 😊!
+
+---
+
+Regular text that comes with pushing a React project to the main branch:
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
