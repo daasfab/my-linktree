@@ -1,28 +1,33 @@
 import { useState, useEffect } from "react";
-import { FaGithub, FaInstagram, FaMedium, FaUserShield } from "react-icons/fa";
+import {
+  FaGithub,
+  FaInstagram,
+  FaMedium,
+  FaUserShield,
+} from "react-icons/fa";
 import "./App.css";
 
 const links = [
   {
-    name: "GitHub",
+    name: "github",
     url: "https://github.com/daasfab",
-    appUrl: "github://user?username=daasfab", // this will see if the app is instlaled to user's mobile device (if site is opened on mobile), if so, will open the link on the respective app! :)
+    appUrl: "github://profile/daasfab",
     icon: <FaGithub />,
   },
   {
-    name: "Medium",
+    name: "medium",
     url: "https://medium.com/@thatonecyberguy",
-    appUrl: "medium://@thatonecyberguy", 
+    appUrl: "", // medium doesn't support proper deep linking to profiles
     icon: <FaMedium />,
   },
   {
-    name: "Instagram",
+    name: "instagram",
     url: "https://instagram.com/daasfab_",
     appUrl: "instagram://user?username=daasfab_",
     icon: <FaInstagram />,
   },
   {
-    name: "Portfolio (Coming Soon)",
+    name: "portfolio (coming soon)",
     url: "#",
     icon: <FaUserShield />,
     comingSoon: true,
@@ -30,7 +35,7 @@ const links = [
 ];
 
 export default function LinktreePage() {
-  const [_isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -40,25 +45,19 @@ export default function LinktreePage() {
   }, []);
 
   const handleClick = (
-  e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  link: typeof links[number]
-) => {
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    link: typeof links[number]
+  ) => {
+    if (!isMobile || !link.appUrl || link.comingSoon) return;
 
-  if (isMobile && link.appUrl) {
     e.preventDefault();
 
-    // attemptin to open app
-    window.location.href = link.appUrl;
-
-    // falling back only if user stays on the page (i.e., app did not open)
     const fallbackTimeout = setTimeout(() => {
       if (document.visibilityState === "visible") {
         window.open(link.url, "_blank", "noopener,noreferrer");
       }
-    }, 1000);
+    }, 1500);
 
-    // cancelling fallback if app takes focus
     const handleVisibilityChange = () => {
       if (document.visibilityState === "hidden") {
         clearTimeout(fallbackTimeout);
@@ -68,22 +67,29 @@ export default function LinktreePage() {
     document.addEventListener("visibilitychange", handleVisibilityChange, {
       once: true,
     });
-  }
-};
 
-  
+    const iframe = document.createElement("iframe");
+    iframe.style.display = "none";
+    iframe.src = link.appUrl;
+    document.body.appendChild(iframe);
+
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+    }, 1000);
+  };
+
   return (
     <div className="page">
       <div className="profile">
-        <img src="/pfp.png" alt="Profile" />
-        <h1>Daulet Rashidov</h1>
-        <p>Cybersecurity & Software Engineer</p>
-        <p>Pronouns: He/Him</p>
+        <img src="/pfp.png" alt="profile" />
+        <h1>daulet rashidov</h1>
+        <p>cybersecurity & software engineer</p>
+        <p>pronouns: he/him</p>
         <p className="bio">
-          Software Engineer with a Cyber Security soul—building smart systems,
-          breaking them (ethically 😅), and always learning. Fueled by
-          curiosity, coffee (lots), and a love for digital defense. Let’s
-          connect & Make Magic Happen! ✨"
+          software engineer with a cyber security soul—building smart systems,
+          breaking them (ethically 😅), and always learning. fueled by
+          curiosity, coffee (lots), and a love for digital defense. let’s
+          connect & make magic happen! ✨
         </p>
       </div>
 
@@ -94,8 +100,8 @@ export default function LinktreePage() {
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => handleClick(e, link)}
             className={`link-item ${link.comingSoon ? "coming-soon" : ""}`}
+            onClick={(e) => handleClick(e, link)}
           >
             <div className="link-left">
               <span>{link.icon}</span>
@@ -103,9 +109,13 @@ export default function LinktreePage() {
             </div>
             {link.comingSoon && (
               <span
-                style={{ fontSize: "14px", fontStyle: "italic", color: "#aaa" }}
+                style={{
+                  fontSize: "14px",
+                  fontStyle: "italic",
+                  color: "#aaa",
+                }}
               >
-                Soon
+                soon
               </span>
             )}
           </a>
