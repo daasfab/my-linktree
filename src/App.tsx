@@ -56,7 +56,7 @@ export default function LinktreePage() {
       if (document.visibilityState === "visible") {
         window.open(link.url, "_blank", "noopener,noreferrer");
       }
-    }, 1500);
+    }, 1000);
 
     // cancelling fallback if app takes focus
     const handleVisibilityChange = () => {
