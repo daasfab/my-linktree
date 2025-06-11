@@ -11,16 +11,19 @@ const links = [
   {
     name: "GitHub",
     url: "https://github.com/daasfab",
+    appUrl: "",
     icon: <FaGithub />,
   },
   {
     name: "Medium",
     url: "https://medium.com/@thatonecyberguy",
+    appUrl: "",
     icon: <FaMedium />,
   },
   {
     name: "Instagram",
     url: "https://instagram.com/daasfab_",
+    appUrl: "",
     icon: <FaInstagram />,
   },
   {
@@ -86,6 +89,7 @@ export default function LinktreePage() {
             target="_blank"
             rel="noopener noreferrer"
             className={`link-item ${link.comingSoon ? "coming-soon" : ""}`}
+            onClick={(e) => handleClick(e, link)} // ❌ remove this line
           >
 
             <div className="link-left">
