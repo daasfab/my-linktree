@@ -83,7 +83,7 @@ export default function LinktreePage() {
       <div className="profile">
         <img src="/pfp.png" alt="profile" />
         <h1>Daulet Rashidov</h1>
-        <p>Cybersecurity & Software Engineer</p>
+        <p>Cyber Security & Software Engineer</p>
         <p>Pronouns: He/Him</p>
         <p className="bio">
           Software Engineer with a Cyber Security soul—building smart systems,
