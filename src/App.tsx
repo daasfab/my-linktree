@@ -11,11 +11,13 @@ const links = [
   {
     name: "github",
     url: "https://github.com/daasfab",
+    appUrl: "",
     icon: <FaGithub />,
   },
   {
     name: "medium",
     url: "https://medium.com/@thatonecyberguy",
+    appUrl: "", // medium doesn't support proper deep linking to profiles
     icon: <FaMedium />,
   },
   {
