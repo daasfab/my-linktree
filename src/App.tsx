@@ -44,39 +44,27 @@ export default function LinktreePage() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const handleClick = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    link: typeof links[number]
-  ) => {
-    if (!isMobile || !link.appUrl || link.comingSoon) return;
+ const handleClick = (
+  e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  link: typeof links[number]
+) => {
+  if (!isMobile || !link.appUrl || link.comingSoon) return;
 
-    e.preventDefault();
+  e.preventDefault();
 
-    const fallbackTimeout = setTimeout(() => {
-      if (document.visibilityState === "visible") {
-        window.open(link.url, "_blank", "noopener,noreferrer");
-      }
-    }, 1500);
+  const start = Date.now();
 
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "hidden") {
-        clearTimeout(fallbackTimeout);
-      }
-    };
+  // try to open the app
+  window.location.href = link.appUrl;
 
-    document.addEventListener("visibilitychange", handleVisibilityChange, {
-      once: true,
-    });
-
-    const iframe = document.createElement("iframe");
-    iframe.style.display = "none";
-    iframe.src = link.appUrl;
-    document.body.appendChild(iframe);
-
-    setTimeout(() => {
-      document.body.removeChild(iframe);
-    }, 1000);
-  };
+  // fallback to web if app doesn't open within 1s
+  setTimeout(() => {
+    const now = Date.now();
+    if (now - start < 2000) {
+      window.open(link.url, "_blank", "noopener,noreferrer");
+    }
+  }, 1000);
+};
 
   return (
     <div className="page">
