@@ -39,18 +39,38 @@ export default function LinktreePage() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, link: typeof links[number]) => {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if (isMobile && link.appUrl) {
-      e.preventDefault();
-      window.location.href = link.appUrl;
+  const handleClick = (
+  e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  link: typeof links[number]
+) => {
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-      // fallback to browser link after a sec if app doesn't open
-      setTimeout(() => {
+  if (isMobile && link.appUrl) {
+    e.preventDefault();
+
+    // attemptin to open app
+    window.location.href = link.appUrl;
+
+    // falling back only if user stays on the page (i.e., app did not open)
+    const fallbackTimeout = setTimeout(() => {
+      if (document.visibilityState === "visible") {
         window.open(link.url, "_blank", "noopener,noreferrer");
-      }, 1000);
-    }
-  };
+      }
+    }, 1500);
+
+    // cancelling fallback if app takes focus
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        clearTimeout(fallbackTimeout);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange, {
+      once: true,
+    });
+  }
+};
+
   
   return (
     <div className="page">
