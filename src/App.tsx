@@ -11,19 +11,16 @@ const links = [
   {
     name: "GitHub",
     url: "https://github.com/daasfab",
-    appUrl: "",
     icon: <FaGithub />,
   },
   {
     name: "Medium",
     url: "https://medium.com/@thatonecyberguy",
-    appUrl: "", // medium doesn't support proper deep linking to profiles
     icon: <FaMedium />,
   },
   {
     name: "Instagram",
     url: "https://instagram.com/daasfab_",
-    appUrl: "instagram://user?username=daasfab_", //will open my profile locally on the app instead of web
     icon: <FaInstagram />,
   },
   {
@@ -89,8 +86,8 @@ export default function LinktreePage() {
             target="_blank"
             rel="noopener noreferrer"
             className={`link-item ${link.comingSoon ? "coming-soon" : ""}`}
-            onClick={(e) => handleClick(e, link)}
           >
+
             <div className="link-left">
               <span>{link.icon}</span>
               {link.name}
