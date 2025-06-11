@@ -27,7 +27,7 @@ const links = [
 ];
 
 export default function LinktreePage() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [_isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
