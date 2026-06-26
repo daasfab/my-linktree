@@ -74,7 +74,7 @@ export default function LinktreePage() {
         <p>Cyber Security & Software Engineer</p>
         <p>Pronouns: He/Him</p>
         <p className="bio">
-          Software Engineer with a Cyber Security soul—building smart systems,
+          Software Engineer with a Cyber Security soul building smart systems,
           breaking them (ethically! 😅), and always learning. Fueled by
           curiosity, coffee (lots), and a love for digital defense. Let’s
           connect & Make Magic Happen! ✨
